@@ -11,12 +11,16 @@ function App() {
   const [myRecipe, setMyRecipe] = useState([]);
   const [wordSubmitted, setWordSubmitted] = useState("avocado");
 
-  useEffect(async () => {
+
+  useEffect(() => {
+  async function fetchData() {
     const response = await fetch(`https://api.edamam.com/search?q=${wordSubmitted}&app_id=${API_ID}&app_key=${API_KEY}`);
     const data = await response.json();
     setMyRecipe(data.hits);
-  }, [wordSubmitted]) 
-    
+  }
+  fetchData();
+}, [wordSubmitted]);
+
   const myRecipeSearch = (e) => {
     setMySearch(e.target.value);
     
